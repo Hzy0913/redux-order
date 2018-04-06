@@ -3,16 +3,26 @@ export default function reduxOrder() {
     if (typeof action === 'function') {
       return action(dispatch, getState);
     }
-    const {types, promise, ...rest} = action;
+    const {types = [], promise} = action;
+    const [REQUEST, SUCCESS, FAIL] = types;
+    function orderAction(type, resultType, result) {
+      const state = {type, [resultType]: result};
+      Object.keys(action).forEach(item => {
+        if (item === 'types' || item === 'promise' || item === 'type') return;
+        state[item] = action[item];
+      });
+      return state;
+    }
     if (!promise) {
       return next(action);
     }
-    const [REQUEST, SUCCESS, FAIL] = types;
-    dispatch({type: REQUEST, ...rest});
+    dispatch(orderAction(REQUEST));
     return action.promise.then(res => {
-      return dispatch({type: SUCCESS, res, ...rest});
+      if (!SUCCESS) return;
+      return dispatch(orderAction(SUCCESS, 'res', res));
     }).catch((err) => {
-      return dispatch({type: FAIL, err, ...rest});
+      if (!FAIL) return;
+      return dispatch(orderAction(FAIL, 'err', err));
     });
   };
 }
