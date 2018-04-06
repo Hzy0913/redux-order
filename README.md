@@ -88,10 +88,11 @@ export function login(user, pass) {
 
 
 #### 异步action
-在上面的例子里，我们创建了`异步`的redux请求。例子中定义了`LOGIN`、`LOGIN_SUCCESS`、`LOGIN_FAIL`三个action，依次代表请求发出、请求成功、请求失败。在发出一个异步`promise`请求后，首先触发了`LOGIN`,假如请求成功则进入`LOGIN_SUCCESS`，否则就进入`LOGIN_FAIL`。
-在异步动作是，定义`types`对象，types为数组并且至少需要两个action，`promise`参数为异步请求，异步请求必须为promise对象。
-请求的结果在reducer中的action对象中获得，如果是成功的返回结果为`action.req`，失败的则是`action.err`。
-在发出action时，还可以携带payload。可以自定义需要携带的参数，在reducer中即可访问action携带的参数。
+
+ - 在上面的例子里，我们创建了`异步`的redux请求。例子中定义了`LOGIN`、`LOGIN_SUCCESS`、`LOGIN_FAIL`三个action，依次代表请求发出、请求成功、请求失败。在发出一个异步`promise`请求后，首先触发了`LOGIN`,假如请求成功则进入`LOGIN_SUCCESS`，否则就进入`LOGIN_FAIL`。
+ - 异步动作需要定义`types`，types为数组并且至少需要两个action（发出请求和结果），`promise`参数为异步请求，异步请求必须为promise对象。
+ - 请求的结果在reducer中的action对象中获得，如果是成功的返回结果为`action.req`，失败的则是`action.err`。
+ - 在发出action时，还可以携带payload。可以自定义需要携带的参数，在reducer中即可访问action携带的参数。
 
 #### 同步action
 ```javascript
