@@ -16,7 +16,7 @@ function reduxOrder() {
           var state = {type: type};
           state[resultType] = result;
           for (var item in action) {
-            if (item === 'types' || item === 'promise' || item === 'type') break;
+            if (item === 'types' || item === 'promise' || item === 'type') continue;
             state[item] = action[item];
           };
           return state;
