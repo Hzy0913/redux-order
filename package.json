@@ -1,6 +1,6 @@
 {
   "name": "redux-order",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "redux middleware asyn promise",
   "main": "index.js",
   "scripts": {
